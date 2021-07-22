@@ -1,0 +1,23 @@
+# Read the documentation: https://github.com/1up-lab/OneupFlysystemBundle/tree/master/Resources/doc/index.md
+oneup_flysystem:
+    adapters:
+#        mi_local_adapter:
+#            local:
+#                directory: '/srv/'
+        mi_adapter:
+            awss3v3:
+                client: app.s3_client
+                bucket: '%env(AWS_S3_BUCKET)%'
+
+    filesystems:
+#        mi_local:
+#            adapter: mi_local_adapter
+#            cache: ~
+#            mount: ~
+#            alias: mi_filesystem_local
+        mi:
+            adapter: mi_adapter
+            alias: mi_filesystem
+            mount: mi
+
+

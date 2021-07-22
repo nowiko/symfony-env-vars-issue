@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+{ set -e -x ;} &>/dev/null
+
+xdebug_config=/usr/local/etc/php/conf.d/xdebug.ini
+
+opcache_config=/usr/local/etc/php/conf.d/opcache.ini
+
+if [ "$SYMFONY_ENV" == "dev" ] ; then
+    echo "zend_extension=xdebug.so" > "$xdebug_config"
+    echo "xdebug.remote_enable=on" >> "$xdebug_config"
+    echo "xdebug.remote_autostart=on" >> "$xdebug_config"
+    echo "xdebug.remote_connect_back=on" >> "$xdebug_config"
+
+    declare PHP_IDE_CONFIG="serverName=$TARGET_HOST"
+    export PHP_IDE_CONFIG
+    #echo "xdebug.remote_host=$(ip route show 0.0.0.0/0 | awk '{ print $3 }')" >> "$xdebug_config"
+
+    echo "xdebug.remote_host=10.0.2.2" >> "$xdebug_config"
+    rm -f $opcache_config
+fi
+
+php-fpm --allow-to-run-as-root

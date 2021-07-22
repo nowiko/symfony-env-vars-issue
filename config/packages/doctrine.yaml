@@ -1,0 +1,18 @@
+parameters:
+    env(DATABASE_URL): ''
+
+doctrine:
+    dbal:
+        server_version: 13.0
+        driver:   pdo_pgsql
+        charset:  UTF8
+        url: '%env(resolve:DATABASE_URL)%'
+    orm:
+        default_repository_class: Happyr\DoctrineSpecification\EntitySpecificationRepository
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        filters:
+            softdeleteable:
+                class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                enabled: true
