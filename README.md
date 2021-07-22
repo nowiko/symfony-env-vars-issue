@@ -11,15 +11,17 @@
     git clone git@github.com:nowiko/symfony-env-vars-issue.git
 ```
 
-2) Create `.env.local` file (copy `.env`) and add actual values for following groups of environment variables - `MAILER_*`, `AWS_`, and run:
-```bash
-composer dump-env
-```
+2) Create `.env.local` file (copy `.env`) and add actual values for following groups of environment variables - `MAILER_*`, `AWS_`
 
 3) Install project dependencies via [Composer](https://getcomposer.org/download/):
 ```bash
     composer install
 ```
+then run 
+```bash
+    composer dump-env
+```
+
 
 4) Run following command to build images and start containers:
 ```bash
